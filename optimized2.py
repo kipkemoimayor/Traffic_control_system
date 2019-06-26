@@ -3,43 +3,50 @@ import RPi.GPIO as test
 count1 = 0
 count2 = 0
 
+def lights():
+    test.setmode(test.BOARD)
+    test.setup(12,test.OUT)
+    test.setup(8,test.OUT)
+    test.setup(22,test.OUT)
+    test.setup(16,test.OUT)
+
+    test.output(12,True) #Red light On
+    test.output(8,True) #Red light On
+    test.output(22,True) #Red light On
+    test.output(16,True) #Red light On
+
+
 def station6():
 
-    print('station 6 running')
-
     test.setmode(test.BOARD)
-    test.setup(7, test.OUT)
-    test.setup(16, test.OUT)
-    test.setup(40, test.OUT)
-    test.output(16, True)
-    print('Red 6')
+    test.setup(12, test.OUT)
+    test.setup(24, test.OUT)
+    test.setup(32, test.OUT)
+    test.output(12, True) #Red light On
     time.sleep(3)
-    test.output(16, False)
+    test.output(12, False) #Red light False
     time.sleep(0.5)
-    test.output(7, True)
-    print('Orange 6')
+    test.output(24, True) #Orange light On
     time.sleep(3)
-    test.output(7, False)
+    test.output(24, False) #Orange light Off
     time.sleep(0.5)
-    test.output(40, True)
-    print('green 6')
-    test.output(40,False)
+    test.output(32, True) #Green light On
+    time.sleep(3)
 
-    greenstart=time.time()
+    greenstart=time.time() #Start time green light goes on
 
     while True:
 
-        greenstop=time.time()
-        green=greenstop-greenstart
-        print('Green:' + str(green))
+        greenstop=time.time() #Regular time stops for green
+        green=greenstop-greenstart #Time duration green light is on
 
-
-        TRIG=11
-        ECHO=13
+        #Sensors code
+        TRIG=35
+        ECHO=33
         test.setup(TRIG,test.OUT)
         test.setup(ECHO,test.IN)
         test.output(TRIG,True)
-        time.sleep(0.0001)
+        time.sleep(1)
         test.output(TRIG,False)
 
         while test.input(ECHO)==False:
@@ -50,44 +57,39 @@ def station6():
         sig_time=end-start
 
         distance=sig_time/0.000058
-        dis=round(distance,0)
-        print('dis = ' + str(dis))
+        dis=round(distance,0) #Distance of closest object from sensor
 
 
-        if green>15 or dis>10:
+        if green>5 or dis>10: #Check whether green duration time exceeds 5 seconds or the closest object distance exceeds 10 cm
 
-            print('Green 6')
-            test.output(40, False)
+            test.output(32, False) #Green light Off
             time.sleep(0.5)
-            test.output(7, True)
+            test.output(24, True) #Orange light On
             time.sleep(1)
-            print('Orange 6')
-            test.output(7, False)
+            test.output(24, False) #Orange light On
             time.sleep(0.5)
-            print('Red 6')
-            test.output(16, True)
+            test.output(12, True) #Red light On
+            test.output(35, False)
             break
+
+# Same Comments apply for all stations
 
 def station3():
 
-    print('station 3 running')
-
     test.setmode(test.BOARD)
-    test.setup(22, test.OUT)
-    test.setup(37, test.OUT)
-    test.setup(36, test.OUT)
-    test.output(22, True)
-    print('Red 3')
+    test.setup(8, test.OUT)
+    test.setup(26, test.OUT)
+    test.setup(10, test.OUT)
+    test.output(8, True)
     time.sleep(3)
-    test.output(22, False)
+    test.output(8, False)
     time.sleep(0.5)
-    test.output(37, True)
-    print('Orange 3')
+    test.output(26, True)
     time.sleep(3)
-    test.output(37, False)
+    test.output(26, False)
     time.sleep(0.5)
-    test.output(36, True)
-    print('green 3')
+    test.output(10, True)
+    time.sleep(3)
 
     greenstart=time.time()
 
@@ -95,15 +97,14 @@ def station3():
 
         greenstop=time.time()
         green=greenstop-greenstart
-        print('Green:' + str(green))
 
 
-        TRIG=3
-        ECHO=5
+        TRIG=31
+        ECHO=29
         test.setup(TRIG,test.OUT)
         test.setup(ECHO,test.IN)
         test.output(TRIG,True)
-        time.sleep(0.0001)
+        time.sleep(1)
         test.output(TRIG,False)
 
         while test.input(ECHO)==False:
@@ -115,51 +116,35 @@ def station3():
 
         distance=sig_time/0.000058
         dis=round(distance,0)
-        print('dis = ' + str(dis))
 
 
-        if green>15 or dis>10:
+        if green>5 or dis>10:
 
-            print('Green')
-            test.output(36, False)
+            test.output(10, False)
             time.sleep(0.5)
-            test.output(37, True)
+            test.output(26, True)
             time.sleep(1)
-            print('Orange')
-            test.output(37, False)
+            test.output(26, False)
             time.sleep(0.5)
-            print('Red')
-            test.output(22, True)
+            test.output(8, True)
+            test.output(31,False)
             break
 
 def station2and5():
 
-    print('station 2 and 5 running')
-
     test.setmode(test.BOARD)
-    test.setup(7, test.OUT)
-    test.setup(16, test.OUT)
-    test.setup(40, test.OUT)
     test.setup(22, test.OUT)
     test.setup(37, test.OUT)
     test.setup(36, test.OUT)
-    test.output(16, True)
     test.output(22, True)
-    print('Red 2 and Red 5')
     time.sleep(3)
-    test.output(16, False)
     test.output(22, False)
     time.sleep(0.5)
-    test.output(7, True)
     test.output(37, True)
-    print('Orange 2 and Orange 5')
     time.sleep(3)
-    test.output(7, False)
     test.output(37, False)
     time.sleep(0.5)
-    test.output(40, True)
     test.output(36, True)
-    print('Green 2 and Green 5')
     time.sleep(3)
 
 
@@ -169,19 +154,18 @@ def station2and5():
 
         greenstop=time.time()
         green=greenstop-greenstart
-        print('Green:' + str(green))
 
 
-        TRIG=11
-        ECHO=13
+        TRIG=38
+        ECHO=23
         test.setup(TRIG,test.OUT)
-        test.setup(3,test.OUT)
+        test.setup(19,test.OUT)
         test.setup(ECHO,test.IN)
-        test.setup(5,test.IN)
+        test.setup(21,test.IN)
 
         def ne():
             test.output(TRIG,True)
-            time.sleep(0.00001)
+            time.sleep(1)
             test.output(TRIG,False)
             while test.input(ECHO)==False:
                 start=time.time()
@@ -199,14 +183,14 @@ def station2and5():
         ne()
 
         def other():
-            test.output(3,True)
-            time.sleep(0.00001)
-            test.output(3,False)
-            while test.input(5)==0:
+            test.output(19,True)
+            time.sleep(1)
+            test.output(19,False)
+            while test.input(21)==0:
                 pass
             start1=time.time()
 
-            while test.input(5)==1:
+            while test.input(21)==1:
                 pass
             end1=time.time()
             new_sig=end1-start1
@@ -219,55 +203,35 @@ def station2and5():
         stat2=ne()
         stat5=other()
 
-        print ("distance is " + str(stat2)+' cm')
-        print ("d2 is " + str(stat5)+' cm')
+        if green>5 or (stat2>15 and stat5>15):
 
-        if green>15 or (stat2>15 and stat5>15):
-
-            print('Green 2 and Green 5')
-            test.output(40, False)
             test.output(36, False)
             time.sleep(0.5)
-            test.output(7, True)
             test.output(37, True)
             time.sleep(1)
-            print('Orange 2 and Orange 5')
-            test.output(7, False)
             test.output(37, False)
             time.sleep(0.5)
-            print('Red 2 and Red 5')
-            test.output(16, True)
             test.output(22, True)
+            test.output(38, False)
+            test.output(19,False)
             break
 
 def station1and4():
 
-    print('station 1 and 4 running')
 
     test.setmode(test.BOARD)
     test.setup(7, test.OUT)
     test.setup(16, test.OUT)
     test.setup(40, test.OUT)
-    test.setup(22, test.OUT)
-    test.setup(37, test.OUT)
-    test.setup(36, test.OUT)
     test.output(16, True)
-    test.output(22, True)
-    print('Red 1 and Red 4')
     time.sleep(3)
     test.output(16, False)
-    test.output(22, False)
     time.sleep(0.5)
     test.output(7, True)
-    test.output(37, True)
-    print('Orange 1 and Orange 4')
     time.sleep(3)
     test.output(7, False)
-    test.output(37, False)
     time.sleep(0.5)
     test.output(40, True)
-    test.output(36, True)
-    print('Green 1 and Green 4')
     time.sleep(3)
 
 
@@ -277,7 +241,6 @@ def station1and4():
 
         greenstop=time.time()
         green=greenstop-greenstart
-        print('Green:' + str(green))
 
 
         TRIG=11
@@ -289,7 +252,7 @@ def station1and4():
 
         def ne():
             test.output(TRIG,True)
-            time.sleep(0.00001)
+            time.sleep(1)
             test.output(TRIG,False)
             while test.input(ECHO)==False:
                 start=time.time()
@@ -308,7 +271,7 @@ def station1and4():
 
         def other():
             test.output(3,True)
-            time.sleep(0.00001)
+            time.sleep(1)
             test.output(3,False)
             while test.input(5)==0:
                 pass
@@ -327,28 +290,21 @@ def station1and4():
         stat1=ne()
         stat4=other()
 
-        print ("distance is " + str(stat1)+' cm')
-        print ("d2 is " + str(stat4)+' cm')
+        if green>5 or (stat1>15 and stat4>15):
 
-        if green>15 or (stat1>15 and stat4>15):
-
-            print('Green 1 and Green 4')
             test.output(40, False)
-            test.output(36, False)
             time.sleep(0.5)
             test.output(7, True)
-            test.output(37, True)
             time.sleep(1)
-            print('Orange 1 and Orange 4')
             test.output(7, False)
-            test.output(37, False)
             time.sleep(0.5)
-            print('Red 1 and Red 4')
             test.output(16, True)
-            test.output(22, True)
+            test.output(11,False)
+            test.output(3,False)
             break
 
 def traffic_system():
+    lights()
     while True:
         station1and4()
         station6()
