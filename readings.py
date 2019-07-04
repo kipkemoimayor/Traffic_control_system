@@ -1,7 +1,13 @@
 import time
 import RPi.GPIO as test
-count1 = 0
-count2 = 0
+count14 = 0
+count25 = 0
+count3 = 0
+count6 = 0
+av14 = 0
+av25 = 0
+av3 = 0
+av6 = 0
 
 def lights():
     test.setmode(test.BOARD)
@@ -17,6 +23,8 @@ def lights():
 
 
 def station6():
+
+    global count6, av6 #Defining Global variables
 
     test.setmode(test.BOARD)
     test.setup(12, test.OUT)
@@ -92,6 +100,8 @@ def station6():
 
 def station3():
 
+    global count3, av3 #Defining Global variables
+
     test.setmode(test.BOARD)
     test.setup(8, test.OUT)
     test.setup(26, test.OUT)
@@ -163,6 +173,8 @@ def station3():
             break
 
 def station2and5():
+
+    global count25, av25 #Defining Global variables
 
     test.setmode(test.BOARD)
     test.setup(22, test.OUT)
@@ -266,6 +278,7 @@ def station2and5():
 
 def station1and4():
 
+    global count14, av14 #Defining Global variables
 
     test.setmode(test.BOARD)
     test.setup(7, test.OUT)

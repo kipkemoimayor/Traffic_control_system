@@ -1,3 +1,19 @@
+import time
+import RPi.GPIO as test
+
+def lights():
+    test.setmode(test.BOARD)
+    test.setup(12,test.OUT)
+    test.setup(8,test.OUT)
+    test.setup(22,test.OUT)
+    test.setup(16,test.OUT)
+
+    test.output(12,True)
+    test.output(8,True)
+    test.output(22,True)
+    test.output(16,True)
+
+
 def station(RED, ORANGE, GREEN, TRIG, ECHO, COUNT, AVERAGE):
     #Lights Code
     test.setmode(test.BOARD)
@@ -50,21 +66,17 @@ def station(RED, ORANGE, GREEN, TRIG, ECHO, COUNT, AVERAGE):
             time.sleep(0.5)
             test.output(RED, True) #Red light On
             test.output(TRIG, False) #Sensor Off
-
-            AVERAGE += green # Adding the green times and storing the value to average
-            COUNT += 1 # Counting number of times green times are added
-
-            # Route description code
-            if COUNT == 3:
-                AVERAGE = AVERAGE/3 # Finding average of green time
-                COUNT = 0 # Reseting counter
-
-                if AVERAGE < 2.5:
-                    print('-------------------------------------------------------------------------')
-                    print('Road six is currently not busy with an average green time of '+ str(green))
-                else:
-                    print('-------------------------------------------------------------------------')
-                    print('Road six is currently very busy with average green time of '+ str(green))
-
-                AVERAGE = 0 # Reseting average value
             break
+
+
+def traffic_system():
+    lights() # Begin with all lights red
+    while True:
+        station(16, 7, 40, 11, 13) # Station 1 and 4
+        station(12, 24, 32, 35, 33) # Station 6
+        station(22, 37, 36, 38, 23) # Station 2 and 5
+        station(16, 7, 40, 11, 13) # Station 1 and 4
+        station(8, 26, 10, 31, 29) # Station 3
+        station(22, 37, 36, 38, 23) # Station 2 and 5
+
+traffic_system()

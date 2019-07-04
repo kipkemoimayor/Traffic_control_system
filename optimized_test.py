@@ -1,7 +1,13 @@
 import time
 import RPi.GPIO as test
-count1 = 0
-count2 = 0
+count14 = 0
+count25 = 0
+count3 = 0
+count6 = 0
+av14 = 0
+av25 = 0
+av3 = 0
+av6 = 0
 
 def lights():
     test.setmode(test.BOARD)
@@ -17,6 +23,8 @@ def lights():
 
 
 def station6():
+
+    global count6, av6
 
     print('station 6 running')
 
@@ -80,9 +88,27 @@ def station6():
             print('Red 6')
             test.output(12, True)
             test.output(35, False)
+
+            av6 += green
+            count6 += 1
+
+            if count6 > 3:
+                av6 = av6/3
+                count6 = 0
+
+                if av6 < 2.5:
+                    print('-------------------------------------------------------------------------')
+                    print('Road six is currently not busy with an average green time of '+ str(green))
+                else:
+                    print('-------------------------------------------------------------------------')
+                    print('Road six is currently very busy with average green time of '+ str(green))
+
+                av6 = 0
             break
 
 def station3():
+
+    global count3, av3
 
     print('station 3 running')
 
@@ -146,9 +172,27 @@ def station3():
             print('Red')
             test.output(8, True)
             test.output(31,False)
+
+            av3 += green
+            count3 += 1
+
+            if count3 > 3:
+                av3 = av3/3
+                count3 = 0
+
+                if av3 < 2.5:
+                    print('-------------------------------------------------------------------------')
+                    print('Road three is currently not busy with an average green time of '+ str(green))
+                else:
+                    print('-------------------------------------------------------------------------')
+                    print('Road three is currently very busy with average green time of '+ str(green))
+
+                av3 = 0
             break
 
 def station2and5():
+
+    global count25, av25
 
     print('station 2 and 5 running')
 
@@ -244,9 +288,27 @@ def station2and5():
             test.output(22, True)
             test.output(38, False)
             test.output(19,False)
+
+            av25 += green
+            count25 += 1
+
+            if count25 > 3:
+                av25 = av25/3
+                count25 = 0
+
+                if av25 < 2.5:
+                    print('-------------------------------------------------------------------------')
+                    print('Roads Two and Five are currently not busy with an average green time of '+ str(green))
+                else:
+                    print('-------------------------------------------------------------------------')
+                    print('Roads Two and Five are currently very busy with average green time of '+ str(green))
+
+                av25 = 0
             break
 
 def station1and4():
+
+    global count14, av14
 
     print('station 1 and 4 running')
 
@@ -342,6 +404,22 @@ def station1and4():
             test.output(16, True)
             test.output(11,False)
             test.output(3,False)
+
+            av14 += green
+            count14 += 1
+
+            if count14 > 3:
+                av14 = av14/3
+                count14 = 0
+
+                if av14 < 2.5:
+                    print('-------------------------------------------------------------------------')
+                    print('Roads One and Four are currently not busy with an average green time of '+ str(green))
+                else:
+                    print('-------------------------------------------------------------------------')
+                    print('Roads One and Four are currently very busy with average green time of '+ str(green))
+
+                av14 = 0
             break
 
 def traffic_system():

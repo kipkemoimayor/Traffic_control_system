@@ -1,18 +1,22 @@
-def station():
+RED=0
+ORANGE=0
+GREEN=0
+
+def station(RED. ORANGE, GREEN):
     #Lights Code
     test.setmode(test.BOARD)
-    test.setup(12, test.OUT)
-    test.setup(24, test.OUT)
-    test.setup(32, test.OUT)
-    test.output(12, True) #Red light On
+    test.setup(RED, test.OUT)
+    test.setup(ORANGE, test.OUT)
+    test.setup(GREEN, test.OUT)
+    test.output(RED, True) #Red light On
     time.sleep(3)
-    test.output(12, False) #Red light Off
+    test.output(RED, False) #Red light Off
     time.sleep(0.5)
-    test.output(24, True) #Orange light On
+    test.output(ORANGE, True) #Orange light On
     time.sleep(3)
-    test.output(24, False) #Orange light Off
+    test.output(ORANGE, False) #Orange light Off
     time.sleep(0.5)
-    test.output(32, True) #Green light On
+    test.output(GREEN, True) #Green light On
     time.sleep(3)
 
     greenstart=time.time() #Start time green light goes on
@@ -24,12 +28,12 @@ def station():
 
         if green>5: #Check whether green duration time exceeds 5 seconds or the closest object distance exceeds 10 cm
 
-            test.output(32, False) #Green light Off
+            test.output(GREEN, False) #Green light Off
             time.sleep(0.5)
-            test.output(24, True) #Orange light On
+            test.output(ORANGE, True) #Orange light On
             time.sleep(1)
-            test.output(24, False) #Orange light Off
+            test.output(ORANGE, False) #Orange light Off
             time.sleep(0.5)
-            test.output(12, True) #Red light On
-            test.output(35, False) #Sensor Off
+            test.output(ORANGE, True) #Red light On
+            test.output(RED, False) #Sensor Off
             break
