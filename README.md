@@ -8,7 +8,7 @@ This is a hardware and software application that is intended to reduce traffic c
 * jumper cables
 * Ultrasonic Sensors
 ## Youtube video of the Demo
-Demo video can be found here [](https://www.youtube.com/watch?v=pN3hL647Pio)
+Demo video can be found here https://www.youtube.com/watch?v=pN3hL647Pio
 ## Installation Requirements/Procedure
 * Follow this link for Installation guide for the Raspberry https://www.raspberrypi.org/documentation/installation/
 * if you want to remotely access the Raspberry Follow this link https://www.raspberrypi.org/documentation/remote-access/
